@@ -1,2 +1,4 @@
 tt
 tt.exe
+libtinytemplate.a
+src/tinytemplate.o
