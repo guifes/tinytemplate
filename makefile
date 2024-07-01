@@ -1,8 +1,19 @@
+# Determine the platform
+OS := $(shell uname)
 
-all: tt
+# Set executable name based on the platform
+ifeq ($(OS), Windows_NT)
+    EXE := tt.exe
+    GCC := $(MINGWPATH)/gcc
+else
+    EXE := tt
+    GCC := $(MINGWPATH)/gcc
+endif
 
-tt: src/cli.c src/tinytemplate.c 3p/xjson.c
-	gcc $^ -o $@ -Wall -Wextra -g -I3p
+all: $(EXE)
+
+$(EXE): src/cli.c src/tinytemplate.c 3p/xjson.c
+	$(GCC) $^ -o $@ -Wall -Wextra -g -I3p
 
 clean:
-	rm tt tt.exe
+	rm -f tt tt.exe
